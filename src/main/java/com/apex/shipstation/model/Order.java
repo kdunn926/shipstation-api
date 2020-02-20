@@ -55,6 +55,7 @@ public class Order {
     private String userId;
     private boolean externallyFulfilled;
     private String externallyFulfilledBy;
+    private String[] labelMessages;
 
     public long getOrderId() {
         return orderId;
@@ -374,5 +375,13 @@ public class Order {
 
     public void setExternallyFulfilledBy(String externallyFulfilledBy) {
         this.externallyFulfilledBy = externallyFulfilledBy;
+    }
+
+    public String[] getLabelMessages() {
+        return labelMessages;
+    }
+
+    public void setLabelMessages(String[] labelMessages) {
+        this.labelMessages = labelMessages;
     }
 }
