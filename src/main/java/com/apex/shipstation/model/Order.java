@@ -11,7 +11,7 @@ public class Order {
       awaiting_shipment,
       shipped,
       on_hold,
-      canceled
+      cancelled
     };
 
     @Id
