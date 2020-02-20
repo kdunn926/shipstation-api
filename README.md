@@ -26,6 +26,26 @@ $ mvn package
 ```
 
 ## Usage
+
+pom.xml dependency:
+```
+    <dependency>
+      <groupId>com.github.kdunn926</groupId>
+      <artifactId>shipstation-api</artifactId>
+      <version>master-SNAPSHOT</version>
+    </dependency>
+```
+
+pom.xml repository:
+```
+  <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
+```
+
 See [APITest.java](src/test/java/com/apex/shipstation/APITest.java) for examples of each API call.
 ```
 API api = new API("https://ssapi.shipstation.com", "api_key", "api_secret");

@@ -18,6 +18,7 @@ public class AdvancedOptions {
     private String billToAccount;
     private String billToPostalCode;
     private String billToCountryCode;
+    private String billToMyOtherAccount;
 
     public long getWarehouseId() {
         return warehouseId;
@@ -145,5 +146,13 @@ public class AdvancedOptions {
 
     public void setBillToCountryCode(String billToCountryCode) {
         this.billToCountryCode = billToCountryCode;
+    }
+
+    public String getBillToMyOtherAccount() {
+        return billToMyOtherAccount;
+    }
+
+    public void setBillToMyOtherAccount(String billToMyOtherAccount) {
+        this.billToMyOtherAccount= billToMyOtherAccount;
     }
 }
