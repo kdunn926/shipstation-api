@@ -32,7 +32,7 @@ pom.xml dependency:
     <dependency>
       <groupId>com.github.kdunn926</groupId>
       <artifactId>shipstation-api</artifactId>
-      <version>0.4</version>
+      <version>master-SNAPSHOT</version>
     </dependency>
 ```
 
