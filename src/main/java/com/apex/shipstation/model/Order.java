@@ -7,6 +7,7 @@ import javax.persistence.Id;
 public class Order {
 
     public enum STATUS {
+      pending_fulfillment,
       awaiting_payment,
       awaiting_shipment,
       shipped,
