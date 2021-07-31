@@ -10,8 +10,8 @@ public class OrderItem {
     private String name;
     private String imageUrl;
     private Weight Weight;
-    private double quantity;
-    private double unitPrice;
+    private int quantity;
+    private float unitPrice;
     private double taxAmount;
     private double shippingAmount;
     private String warehouseLocation;
@@ -71,19 +71,19 @@ public class OrderItem {
         Weight = weight;
     }
 
-    public double getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public double getUnitPrice() {
+    public float getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
+    public void setUnitPrice(float unitPrice) {
         this.unitPrice = unitPrice;
     }
 
