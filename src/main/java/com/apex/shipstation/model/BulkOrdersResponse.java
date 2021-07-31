@@ -6,6 +6,7 @@ public class BulkOrdersResponse {
 
     private boolean hasErrors;
     private List<OrderResponse> results;
+    private String message;
 
     public boolean isHasErrors() {
         return hasErrors;
@@ -21,5 +22,13 @@ public class BulkOrdersResponse {
 
     public void setResults(List<OrderResponse> results) {
         this.results = results;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String m) {
+        this.message = m;
     }
 }
