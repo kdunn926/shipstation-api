@@ -2,10 +2,14 @@ package com.apex.shipstation.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class BulkOrdersResponse {
 
     private boolean hasErrors;
     private List<OrderResponse> results;
+
+    @JsonProperty("Message")
     private String message;
 
     public boolean isHasErrors() {
