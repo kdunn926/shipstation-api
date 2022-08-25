@@ -10,7 +10,7 @@ public class OrderItem {
     private String name;
     private String imageUrl;
     private Weight Weight;
-    private double quantity;
+    private int quantity;
     private double unitPrice;
     private double taxAmount;
     private double shippingAmount;
@@ -71,11 +71,11 @@ public class OrderItem {
         Weight = weight;
     }
 
-    public double getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
