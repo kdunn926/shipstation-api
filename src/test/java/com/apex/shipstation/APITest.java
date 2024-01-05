@@ -900,7 +900,7 @@ public class APITest {
         assertThat( 0.01).isEqualTo(shipment.getShipmentCost());
         assertThat( 0.01).isEqualTo(shipment.getInsuranceCost());
         assertThat( "9400111899561704681189").isEqualTo(shipment.getTrackingNumber());
-        assertThat( false).isEqualTo(shipment.getReturnLabel());
+        assertThat( false).isEqualTo(shipment.getIsReturnLabel());
         assertThat( "100301").isEqualTo(shipment.getBatchNumber());
         assertThat( "stamps_com").isEqualTo(shipment.getCarrierCode());
         assertThat( "usps_first_class_mail").isEqualTo(shipment.getServiceCode());
@@ -968,7 +968,7 @@ public class APITest {
         assertThat( 0.01).isEqualTo(shipment.getShipmentCost());
         assertThat( 0.01).isEqualTo(shipment.getInsuranceCost());
         assertThat( "782390443992").isEqualTo(shipment.getTrackingNumber());
-        assertThat( false).isEqualTo(shipment.getReturnLabel());
+        assertThat( false).isEqualTo(shipment.getIsReturnLabel());
         //assertThat( null).isEqualTo(shipment.getBatchNumber());
         assertThat( "fedex").isEqualTo(shipment.getCarrierCode());
         assertThat( "fedex_ground").isEqualTo(shipment.getServiceCode());
