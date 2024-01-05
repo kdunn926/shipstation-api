@@ -23,9 +23,9 @@ jobs:
 
     - name: Build with Maven
       run: |
-        env | grep -E 'M3|M2|MAVEN'
+        env | grep -E 'M3|M2|MAVEN' || echo "No maven home set"
         mvn --version
-        unset M2_HOME
+        unset M2_HOME || echo "No maven home set"
         mvn compile
 
     # TODO implement api responses and mock client
