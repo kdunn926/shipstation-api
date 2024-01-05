@@ -21,7 +21,7 @@ public class Shipment {
     private Double shipmentCost;
     private Double insuranceCost;
     private String trackingNumber;
-    private Boolean isReturnLabel;
+    private Boolean returnLabel;
     private String batchNumber;
     private String carrierCode;
     private String serviceCode;

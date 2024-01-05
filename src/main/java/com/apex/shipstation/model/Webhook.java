@@ -9,19 +9,19 @@ import lombok.Data;
 @Data
 public class Webhook {
 
-    private Boolean IsLabelAPIHook;
-    private Long WebHookID;
-    private Long SellerID;
-    private Long StoreID;
-    private String HookType;
-    private String MessageFormat;
-    private String Url;
-    private String Name;
-    private String BulkCopyBatchID;
-    private String BulkCopyRecordID;
-    private Boolean Active;
-    private List<String> WebhookLogs;
-    private String Seller;
-    private String Store;
+    private Boolean labelApiHook;
+    private Long webHookId;
+    private Long sellerId;
+    private Long storeId;
+    private String hookType;
+    private String messageFormat;
+    private String url;
+    private String name;
+    private String bulkCopyBatchId;
+    private String bulkCopyRecordId;
+    private Boolean active;
+    private List<String> webhookLogs;
+    private String seller;
+    private String store;
 
 }
