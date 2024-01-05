@@ -1,23 +1,11 @@
 package com.apex.shipstation.model;
 
+import lombok.Data;
+
+@Data
 public class SuccessResponse {
 
-    private boolean success;
+    private Boolean success;
     private String message;
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

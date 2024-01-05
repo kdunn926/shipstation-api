@@ -6,7 +6,7 @@ ShipStation Java API Client
 
 ## Build Requirements
 ```
-Java 8 JDK
+Java 21 JDK
 Maven
 ```
 
@@ -57,5 +57,5 @@ System.out.println(order.getOrderNumber());
 
 ## Known Issues
 ```
-listUsers - does not work with the mock api.
+Tests
 ```

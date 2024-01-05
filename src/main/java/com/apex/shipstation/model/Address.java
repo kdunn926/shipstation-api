@@ -1,5 +1,8 @@
 package com.apex.shipstation.model;
 
+import lombok.Data;
+
+@Data
 public class Address {
 
     private String name;
@@ -12,102 +15,7 @@ public class Address {
     private String postalCode;
     private String country;
     private String phone;
-    private boolean residential;
+    private Boolean residential;
     private String addressVerified;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public String getStreet1() {
-        return street1;
-    }
-
-    public void setStreet1(String street1) {
-        this.street1 = street1;
-    }
-
-    public String getStreet2() {
-        return street2;
-    }
-
-    public void setStreet2(String street2) {
-        this.street2 = street2;
-    }
-
-    public String getStreet3() {
-        return street3;
-    }
-
-    public void setStreet3(String street3) {
-        this.street3 = street3;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public boolean isResidential() {
-        return residential;
-    }
-
-    public void setResidential(boolean residential) {
-        this.residential = residential;
-    }
-
-    public String getAddressVerified() {
-        return addressVerified;
-    }
-
-    public void setAddressVerified(String addressVerified) {
-        this.addressVerified = addressVerified;
-    }
 }
