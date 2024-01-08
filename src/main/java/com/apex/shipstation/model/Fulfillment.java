@@ -16,6 +16,8 @@ public class Fulfillment {
     private String voidDate;
     private String deliveryDate;
     private String carrierCode;
+    private String sellerFillProviderId;
+    private String sellerFillProviderName;
     private String fulfillmentProviderCode;
     private String fulfillmentServiceCode;
     private Double fulfillmentFee;
