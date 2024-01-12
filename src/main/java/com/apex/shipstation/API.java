@@ -271,24 +271,42 @@ public class API {
         return mapper.readValue(res.body(), SuccessResponse.class);
     }
 
-    public ListOrders listOrders() throws IOException, InterruptedException {
-        HttpResponse<String> res = GET("/orders");
+    private Boolean emptyOrNullString(String s) {
+        return Objects.isNull(s) || s.isEmpty();
+    }
+
+    private ListOrders listOrders(String q, Integer p) throws IOException, InterruptedException {
+        Integer page = Objects.isNull(p) ? 1 : p;
+        String pageQuery = String.format("page=%d", p);
+        String query = emptyOrNullString(q) ? pageQuery : q + "&" + pageQuery;
+        query = !query.startsWith("?") ? "?" + query : query;
+        HttpResponse<String> res = GET("/orders" + query);
         return mapper.readValue(res.body(), ListOrders.class);
     }
 
     public ListOrders listOrders(String query) throws IOException, InterruptedException {
-        HttpResponse<String> res = GET("/orders?" + query);
-        return mapper.readValue(res.body(), ListOrders.class);
+        ListOrders firstPage = listOrders(query, null);
+        ListOrders allPages = new ListOrders();
+        List<Order> orderList = firstPage.getOrders();
+        Integer numPages = firstPage.getPages();
+        for (Integer page = 2; page <= numPages; ++page) {
+            orderList.addAll(listOrders(query, page).getOrders());
+        }
+        allPages.setOrders(orderList);
+
+        return allPages;
+    }
+
+    public ListOrders listOrders() throws IOException, InterruptedException {
+        return listOrders(null);
     }
 
     public ListOrders listOrdersByStatus(Order.STATUS status) throws IOException, InterruptedException {
-        HttpResponse<String> res = GET("/orders?orderStatus=" + status.toString());
-        return mapper.readValue(res.body(), ListOrders.class);
+        return listOrders("?orderStatus=" + status.toString());
     }
 
     public ListOrders listOrdersByTag(String query) throws IOException, InterruptedException {
-        HttpResponse<String> res = GET("/orders/listbytag?" + query);
-        return mapper.readValue(res.body(), ListOrders.class);
+        return listOrders("/listbytag?" + query);
     }
 
     public OrderAsShippedResponse markAnOrderAsShipped(OrderAsShippedPayload orderAsShippedPayload) throws IOException, InterruptedException {
@@ -336,14 +354,30 @@ public class API {
         return mapper.readValue(res.body(), ListProducts.class);
     }
 
-    public ListShipments listShipments() throws IOException, InterruptedException {
-        HttpResponse<String> res = GET("/shipments");
+    private ListShipments listShipments(String q, Integer p) throws IOException, InterruptedException {
+        Integer page = Objects.isNull(p) ? 1 : p;
+        String pageQuery = String.format("page=%d", p);
+        String query = emptyOrNullString(q) ? pageQuery : q + "&" + pageQuery;
+        query = !query.startsWith("?") ? "?" + query : query;
+        HttpResponse<String> res = GET("/shipments" + query);
         return mapper.readValue(res.body(), ListShipments.class);
     }
 
     public ListShipments listShipments(String query) throws IOException, InterruptedException {
-        HttpResponse<String> res = GET("/shipments?" + query);
-        return mapper.readValue(res.body(), ListShipments.class);
+        ListShipments firstPage = listShipments(query, null);
+        ListShipments allPages = new ListShipments();
+        List<Shipment> shipmentList = firstPage.getShipments();
+        Integer numPages = firstPage.getPages();
+        for (Integer page = 2; page <= numPages; ++page) {
+            shipmentList.addAll(listShipments(query, page).getShipments());
+        }
+        allPages.setShipments(shipmentList);
+
+        return allPages;
+    }
+
+    public ListShipments listShipments() throws IOException, InterruptedException {
+        return listShipments(null);
     }
 
     public Shipment createShipmentLabel(ShipmentLabelPayload shipmentLabelPayload) throws IOException, InterruptedException {
