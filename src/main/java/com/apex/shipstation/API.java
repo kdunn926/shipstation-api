@@ -277,7 +277,7 @@ public class API {
 
     private ListOrders listOrders(String q, Integer p) throws IOException, InterruptedException {
         Integer page = Objects.isNull(p) ? 1 : p;
-        String pageQuery = String.format("page=%d", p);
+        String pageQuery = String.format("page=%d", page);
         String query = emptyOrNullString(q) ? pageQuery : q + "&" + pageQuery;
         query = !query.startsWith("?") ? "?" + query : query;
         HttpResponse<String> res = GET("/orders" + query);
