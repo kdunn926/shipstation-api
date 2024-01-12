@@ -1,32 +1,12 @@
 package com.apex.shipstation.model;
 
+import lombok.Data;
+
+@Data
 public class InsuranceOptions {
 
     private String provider;
-    private boolean insureShipment;
-    private double insuredValue;
+    private Boolean insureShipment;
+    private Double insuredValue;
 
-    public String getProvider() {
-        return provider;
-    }
-
-    public void setProvider(String provider) {
-        this.provider = provider;
-    }
-
-    public boolean isInsureShipment() {
-        return insureShipment;
-    }
-
-    public void setInsureShipment(boolean insureShipment) {
-        this.insureShipment = insureShipment;
-    }
-
-    public double getInsuredValue() {
-        return insuredValue;
-    }
-
-    public void setInsuredValue(double insuredValue) {
-        this.insuredValue = insuredValue;
-    }
 }
