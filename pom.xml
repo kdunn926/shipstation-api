@@ -37,6 +37,9 @@
           </plugins>
         </build>
       </profile>
+      <profile>
+        <id>ci</id>
+      </profile>
     </profiles>
 
     <dependencies>
