@@ -28,11 +28,7 @@ jobs:
         key: ${{ runner.OS }}-build-${{ hashFiles('**/pom.xml') }}
 
     - name: Build with Maven
-      run: |
-        env | grep -E 'M3|M2|MAVEN'
-        mvn --version
-        unset M2_HOME
-        mvn compile
+      run: mvn compile
 
     - name: Test with Maven
       run: mvn test
