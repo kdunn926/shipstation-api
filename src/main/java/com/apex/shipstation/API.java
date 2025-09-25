@@ -1,10 +1,12 @@
 package com.apex.shipstation;
 
 import com.apex.shipstation.model.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -22,6 +24,14 @@ public class API {
     private String apiKey;
     private String apiSecret;
     private ObjectMapper mapper;
+
+    public interface OmitShippingFields {
+        @JsonIgnore
+        String getCarrierCode();
+
+        @JsonIgnore
+        String getServiceCode();
+    }
 
     public API(String BaseURL, String key, String secret) {
         apiBaseURL = BaseURL;
@@ -248,7 +258,17 @@ public class API {
     }
 
     public Order createOrder(Order order) throws IOException, InterruptedException {
-        String JSON = mapper.writeValueAsString(order);
+        return createOrUpdateOrder(order, false);
+    }
+
+    public Order createOrUpdateOrder(Order order, Boolean omitShippingFields) throws IOException, InterruptedException {
+        ObjectMapper temporaryMapper = mapper.copy();
+        
+        if (omitShippingFields) {
+            temporaryMapper.addMixIn(Order.class, OmitShippingFields.class);
+        }
+
+        String JSON = temporaryMapper.writeValueAsString(order);
         Entity<String> payload = Entity.json(JSON);
         Response res = POST(apiBaseURL + "/orders/createorder", payload);
         return mapper.readValue(res.readEntity(String.class), Order.class);

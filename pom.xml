@@ -8,7 +8,50 @@
     <version>1.0-SNAPSHOT</version>
     <name>shipstation-api</name>
     <url>http://maven.apache.org</url>
+
+    <properties>
+      <!-- assumes ~/.m2/toolchains.xml is configured -->
+      <maven.compiler.source>17</maven.compiler.source>
+      <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+    <profiles>
+      <profile>
+        <id>local</id>
+        <activation>
+          <activeByDefault>true</activeByDefault>
+        </activation>
+        <build>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>3.1.2</version>
+              <configuration>
+                <jdkToolchain>
+                  <!-- assumes ~/.m2/toolchains.xml is configured -->
+                  <version>17</version>
+                </jdkToolchain>
+              </configuration>
+            </plugin>
+          </plugins>
+        </build>
+      </profile>
+    </profiles>
+
     <dependencies>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <version>4.11.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.11.0-M2</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
