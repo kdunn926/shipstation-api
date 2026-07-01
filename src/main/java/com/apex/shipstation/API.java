@@ -4,6 +4,7 @@ import com.apex.shipstation.model.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -34,10 +35,15 @@ public class API {
     }
 
     public API(String BaseURL, String key, String secret) {
+        this(BaseURL, key, secret, true);
+    }
+
+    public API(String BaseURL, String key, String secret, boolean ignoreUnknownFields) {
         apiBaseURL = BaseURL;
         apiKey = key;
         apiSecret = secret;
         mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, !ignoreUnknownFields);
     }
 
     private boolean checkRateLimit(Response response) throws InterruptedException {

@@ -48,7 +48,10 @@ pom.xml repository:
 
 See [APITest.java](src/test/java/com/apex/shipstation/APITest.java) for examples of each API call.
 ```
-API api = new API("https://ssapi.shipstation.com", "api_key", "api_secret");
+API api = new API("https://ssapi.shipstation.com", "api_key", "api_secret"); // ignores newly introduced response fields
+
+// Optional: keep strict response parsing instead
+API strictApi = new API("https://ssapi.shipstation.com", "api_key", "api_secret", false);
 
 Order order = api.getOrder(123456789);
 
