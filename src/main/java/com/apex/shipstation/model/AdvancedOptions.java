@@ -19,6 +19,7 @@ public class AdvancedOptions {
     private String billToPostalCode;
     private String billToCountryCode;
     private String billToMyOtherAccount;
+    private String movementIndicator;
 
     public long getWarehouseId() {
         return warehouseId;
