@@ -36,6 +36,7 @@ import static org.mockito.Mockito.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 
 import com.apex.shipstation.model.Address;
 import com.apex.shipstation.model.Order;
@@ -73,6 +74,7 @@ public class ShipStationAPITests {
         // Setup mock chain
         when(mockClient.target(anyString())).thenReturn(mockWebTarget);
         when(mockWebTarget.request(eq(MediaType.APPLICATION_JSON_TYPE))).thenReturn(mockInvocationBuilder);
+        when(mockWebTarget.request(eq(MediaType.TEXT_PLAIN_TYPE))).thenReturn(mockInvocationBuilder);
         when(mockInvocationBuilder.header(anyString(), anyString())).thenReturn(mockInvocationBuilder);
     }
     
@@ -213,6 +215,71 @@ public class ShipStationAPITests {
         assertEquals("awaiting_shipment", jsonNode.get("orderStatus").asText());
         assertEquals("JDoe", jsonNode.get("customerUsername").asText());
         assertEquals(2, firstItem.get("quantity").asInt());
+    }
+
+    @Test
+    void testGetOrderIgnoresUnknownFieldsByDefault() throws Exception {
+        String mockResponseJson = """
+            {
+              "orderId": 12345,
+              "orderNumber": "ORD-001",
+              "orderStatus": "shipped",
+              "marketingSource": "new-field",
+              "shipTo": {
+                "name": "John Doe",
+                "street1": "123 Main St",
+                "city": "Anytown",
+                "state": "CA",
+                "postalCode": "12345",
+                "country": "US",
+                "deliveryInstructions": "Leave at front desk"
+              },
+              "items": [
+                {
+                  "sku": "ITEM-001",
+                  "name": "Test Item",
+                  "quantity": 2,
+                  "unitPrice": 25.99,
+                  "warehouseBin": "A-1"
+                }
+              ]
+            }
+            """;
+
+        when(mockInvocationBuilder.get()).thenReturn(mockResponse);
+        when(mockResponse.getStatus()).thenReturn(200);
+        when(mockResponse.readEntity(String.class)).thenReturn(mockResponseJson);
+
+        Order result = shipStationService.getOrder(12345);
+
+        assertNotNull(result);
+        assertEquals(12345L, result.getOrderId());
+        assertEquals("ORD-001", result.getOrderNumber());
+        assertEquals(Order.STATUS.shipped, result.getOrderStatus());
+        assertNotNull(result.getShipTo());
+        assertEquals("John Doe", result.getShipTo().getName());
+        assertNotNull(result.getItems());
+        assertEquals(1, result.getItems().size());
+        assertEquals("ITEM-001", result.getItems().get(0).getSku());
+    }
+
+    @Test
+    void testGetOrderFailsOnUnknownFieldsWhenDisabled() throws Exception {
+        String mockResponseJson = """
+            {
+              "orderId": 12345,
+              "orderNumber": "ORD-001",
+              "orderStatus": "shipped",
+              "marketingSource": "new-field"
+            }
+            """;
+
+        when(mockInvocationBuilder.get()).thenReturn(mockResponse);
+        when(mockResponse.getStatus()).thenReturn(200);
+        when(mockResponse.readEntity(String.class)).thenReturn(mockResponseJson);
+
+        assertThrows(UnrecognizedPropertyException.class,
+                () -> new API("http://ship.station", "key", "secret", false).getOrder(12345));
     }
 
     /*
