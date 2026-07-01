@@ -156,4 +156,12 @@ public class AdvancedOptions {
     public void setBillToMyOtherAccount(String billToMyOtherAccount) {
         this.billToMyOtherAccount= billToMyOtherAccount;
     }
+
+    public String getMovementIndicator() {
+        return movementIndicator;
+    }
+
+    public void setMovementIndicator(String mi) {
+        this.movementIndicator = mi;
+    }
 }
